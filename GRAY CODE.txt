@@ -1,0 +1,13 @@
+class Solution:
+    def grayCode(self, n: int) -> List[int]:
+        result=[0]
+        if n==0:
+            return result
+        result.append(1)
+        count=1
+        for i in range(2,n+1):
+            count*=2
+            for j in range(len(result)-1,-1,-1):
+                r=result[j]+count
+                result.append(r)
+        return result

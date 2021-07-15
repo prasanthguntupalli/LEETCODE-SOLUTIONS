@@ -1,0 +1,37 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        res = []
+        
+        row_begin = 0
+        col_begin = 0
+        
+        row_end = len(matrix)
+        col_end = len(matrix[0])
+        
+        total_count = row_end * col_end
+        
+        while len(res) < total_count:
+            for j in range(col_begin, col_end):
+                res.append(matrix[row_begin][j])
+            
+            row_begin += 1
+            
+            for i in range(row_begin, row_end):
+                res.append(matrix[i][col_end - 1])
+            
+            col_end -= 1
+            
+            if row_begin != row_end:
+                for j in range(col_end - 1, col_begin - 1, -1):
+                    res.append(matrix[row_end - 1][j])
+            
+                row_end -= 1
+            
+            if col_begin != col_end:
+                for i in range(row_end - 1, row_begin - 1, -1):
+                    res.append(matrix[i][col_begin])
+            
+                col_begin += 1
+            
+        
+        return res

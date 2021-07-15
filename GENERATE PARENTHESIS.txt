@@ -1,0 +1,18 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        stack=[]
+        result=[]
+        def back_track(opened,closed):
+            if opened==closed==n:
+                result.append("".join(stack))
+                return
+            if opened<n:
+                stack.append("(")
+                back_track(opened+1,closed)
+                stack.pop()
+            if closed<opened:
+                stack.append(")")
+                back_track(opened,closed+1)
+                stack.pop()
+        back_track(0,0)
+        return result

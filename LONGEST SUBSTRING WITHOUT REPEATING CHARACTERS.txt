@@ -1,0 +1,16 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if s==0:
+            return 0
+        primary_string=""
+        secondary_string=""
+        for char in s:
+            if char not in primary_string:
+                primary_string+=char
+            else:
+                if len(primary_string)>len(secondary_string):
+                    secondary_string=primary_string
+                primary_string=primary_string.split(char)[1]+char
+        if len(primary_string)>len(secondary_string):
+            secondary_string=primary_string
+        return len(secondary_string)

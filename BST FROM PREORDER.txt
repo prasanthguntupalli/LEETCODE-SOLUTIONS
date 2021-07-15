@@ -1,0 +1,32 @@
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+        current = TreeNode(preorder[0])
+        root = current
+        stack = collections.deque([current])
+        
+        for element in preorder[1:]:
+            current = TreeNode(element)
+            bottom = stack[-1]
+            
+            if element <= bottom.val:
+                bottom.left = current
+                stack.append(current)
+            else:
+                previous = stack[-1]
+                stack.pop()
+                found = False
+                while len(stack) > 0:
+                    if stack[-1].val > current.val:
+                        previous.right = current
+                        found = True
+                        break
+                    else:
+                        previous = stack[-1]
+                        stack.pop()
+                        
+                if not found:
+                    previous.right = current
+                    
+                stack.append(current)
+                
+        return root
